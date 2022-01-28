@@ -7,17 +7,12 @@ on:
       - feature/*
       - main
       - master
+
 jobs:
   build:
-    name: 'On Ubuntu'
     runs-on: ubuntu-latest
+
     steps:
-
-      - name: 'Checkout the repository'
       - uses: actions/checkout@v2
-
-      - name: 'Install Node Modules'
       - run: npm install
-
-       - name: 'Doing build'
       - run: npm run build
