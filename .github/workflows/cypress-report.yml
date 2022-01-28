@@ -14,6 +14,10 @@ jobs:
         run: |
           npm ci
           $(npm bin)/cypress verify
+          
+      - name: npx cypress cache path
+        run: npx cypress cache path
+             /root/.cache/Cypress
 
       - name: Run Cypress test
         run: npm run test:chrome
