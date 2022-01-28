@@ -1,0 +1,38 @@
+
+name: Generate Cypress report
+
+on: [push]
+
+jobs:
+  cypress-test:
+    name: Run on Chrome 83
+    runs-on: ubuntu-18.04
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    steps:
+      - uses: action/checkout@v2
+      
+      - name: Install cypresss and verify
+        run: |
+          npm ci
+          $(npm bin)/cypress verify
+          
+      - name: Run Cypress test
+        run: npm run test:chrome
+        continue-on-error: false 
+        
+      - name: Copy test exicution videos and screenshots
+        run: |
+          mkdir public
+          cp -r cypress/videos public/videos
+          cp -r cypress/screenshots public/screenshots
+          
+      - name: Merge test reports 
+        run: npm run combine:report
+        
+      - name: Generate HTML report 
+        run: npm run generate:report
+       
+        
+        
+    
+
