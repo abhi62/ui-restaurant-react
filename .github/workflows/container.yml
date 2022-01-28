@@ -1,12 +1,6 @@
 name: Basic Build report
 
-on:
-  [push]
-    branches:
-      - develop
-      - feature/*
-      - main
-      - master
+on: [push]
 
 # jobs:
 #   build:
@@ -16,9 +10,6 @@ on:
 #       - uses: actions/checkout@v2
 #       - run: npm install
 #       - run: npm run build
-
-
-
 
 jobs:
   cypress-run:
