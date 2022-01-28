@@ -1,25 +1,23 @@
-name: deploy-container
+name: Basic Build report
 
 on:
   push:
     branches:
-      - master
-      - main
-      - prod
+      - develop
       - feature/*
-      - ui/*
-    paths:
-      - 'packages/container/**'
-
-defaults:
-  run:
-    working-directory: packages/container
+      - main
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      - name: 'Checkout the repository'
       - uses: actions/checkout@v2
+
+      - name: 'Install Node Modules'
       - run: npm install
+
+       - name: 'Doing build'
       - run: npm run build
