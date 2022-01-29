@@ -3,23 +3,13 @@ name: Generate Cypress report
 on: [push]
 
 jobs:
-  cypress-test:
-    name: Run on Chrome 83
+  cypress-run:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node16.13.0-chrome95-ff94
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Install cypresss and verify
-        run: |
-          npm ci
-          $(npm bin)/cypress verify
-          
-      - name: npx cypress cache path
-        run: npx cypress cache path
-             /root/.cache/Cypress
-
-      - name: Run Cypress test
-        run: npm run test:chrome
-#         continue-on-error: false
-
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          build: npm run build
+          start: npm start
